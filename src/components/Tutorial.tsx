@@ -109,27 +109,24 @@ export default function Tutorial() {
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      <div className="w-full max-w-md bg-white rounded-3xl shadow-xl overflow-hidden mt-2 sm:mt-4">
+      <div className="w-full max-w-md bg-white rounded-3xl shadow-xl overflow-hidden mt-1 sm:mt-4">
         {/* Header */}
-        <div className="text-center pt-5 pb-3 px-5 sm:pt-6 sm:pb-4 sm:px-6">
-          <span className="inline-block px-3 py-1 bg-[#f97316]/10 text-[#f97316] text-xs font-bold rounded-full mb-2">
-            초심자를 위한
-          </span>
-          <h1 className="text-xl sm:text-2xl font-bold text-gray-800 flex items-center justify-center gap-2">
+        <div className="text-center pt-3 pb-1.5 px-4 sm:pt-5 sm:pb-3 sm:px-6">
+          <h1 className="text-lg sm:text-2xl font-bold text-gray-800 flex items-center justify-center gap-1.5">
             <span>🏸</span> 배드민턴 룰 교실
           </h1>
-          <p className="text-xs sm:text-sm text-gray-500 mt-1">
+          <p className="text-[11px] sm:text-sm text-gray-400 mt-0.5">
             복식 경기, 헷갈리는 위치 선정 완벽 정리!
           </p>
         </div>
 
         {/* Court - no key prop so players animate between positions */}
-        <div className="px-3 sm:px-4">
+        <div className="px-2 sm:px-4">
           <BadmintonCourt positions={step.positions} serverId={step.serverId} />
         </div>
 
         {/* Bottom section */}
-        <div className="px-5 pb-5 pt-2 sm:px-6 sm:pb-6">
+        <div className="px-4 pb-4 pt-1 sm:px-6 sm:pb-6">
           {/* Scoreboard */}
           <Scoreboard
             scoreA={step.scoreA}
@@ -138,7 +135,7 @@ export default function Tutorial() {
           />
 
           {/* Step content */}
-          <div className="animate-fade-in min-h-[160px]" key={`content-${currentStep}`}>
+          <div className="animate-fade-in min-h-[120px]" key={`content-${currentStep}`}>
             {isSummaryStep ? (
               <RuleSummaryCard />
             ) : (
