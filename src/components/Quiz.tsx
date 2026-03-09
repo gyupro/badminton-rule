@@ -56,7 +56,7 @@ export default function Quiz({ onBack }: { readonly onBack: () => void }) {
         </p>
         <button
           onClick={onBack}
-          className="px-6 py-3 bg-[#f97316] text-white rounded-full font-semibold hover:bg-[#ea580c] transition-colors"
+          className="px-6 py-3 bg-[#f97316] text-white rounded-full font-semibold hover:bg-[#ea580c] transition-colors cursor-pointer"
         >
           튜토리얼로 돌아가기
         </button>
@@ -79,7 +79,7 @@ export default function Quiz({ onBack }: { readonly onBack: () => void }) {
         {question.question}
       </h3>
 
-      <div className="flex flex-col gap-2 mb-4">
+      <div className="flex flex-col gap-2 mb-4" role="radiogroup" aria-label="답변 선택">
         {question.options.map((option, i) => {
           let style = "bg-white border-gray-200 text-gray-700 hover:border-[#f97316]/50";
           if (showResult) {
@@ -93,10 +93,12 @@ export default function Quiz({ onBack }: { readonly onBack: () => void }) {
           }
           return (
             <button
-              key={i}
+              key={`${currentQuestion}-${i}`}
               onClick={() => handleSelect(i)}
               disabled={showResult}
-              className={`w-full text-left px-4 py-3 rounded-xl border-2 font-medium transition-all ${style} ${!showResult ? "cursor-pointer" : ""}`}
+              role="radio"
+              aria-checked={selectedAnswer === i}
+              className={`w-full text-left px-4 py-3 rounded-xl border-2 font-medium transition-all min-h-[48px] ${style} ${!showResult ? "cursor-pointer" : ""}`}
             >
               <span className="mr-2 text-sm opacity-60">{i + 1}.</span>
               {option}
@@ -106,17 +108,22 @@ export default function Quiz({ onBack }: { readonly onBack: () => void }) {
       </div>
 
       {showResult && (
-        <div className="flex justify-end">
-          <button
-            onClick={handleNext}
-            className="px-5 py-2.5 bg-[#f97316] text-white rounded-full font-semibold hover:bg-[#ea580c] transition-colors flex items-center gap-1"
-          >
-            {currentQuestion < QUIZ_QUESTIONS.length - 1 ? "다음 문제" : "결과 보기"}
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <path d="M9 18l6-6-6-6" />
-            </svg>
-          </button>
-        </div>
+        <>
+          <div className="bg-blue-50 border border-blue-200 rounded-xl px-4 py-3 mb-4 text-sm text-blue-800 animate-fade-in">
+            {question.explanation}
+          </div>
+          <div className="flex justify-end">
+            <button
+              onClick={handleNext}
+              className="px-5 py-2.5 bg-[#f97316] text-white rounded-full font-semibold hover:bg-[#ea580c] transition-colors flex items-center gap-1 cursor-pointer min-h-[44px]"
+            >
+              {currentQuestion < QUIZ_QUESTIONS.length - 1 ? "다음 문제" : "결과 보기"}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </button>
+          </div>
+        </>
       )}
     </div>
   );
