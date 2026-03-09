@@ -168,45 +168,49 @@ export default function Tutorial() {
             )}
           </div>
 
-          {/* Navigation */}
-          <div className="flex items-center justify-between mt-2">
-            <button
-              onClick={goPrev}
-              disabled={currentStep === 0}
-              aria-label="이전 단계"
-              className={`w-11 h-11 rounded-full border flex items-center justify-center transition-all ${
-                currentStep === 0
-                  ? "border-gray-200 text-gray-300 cursor-not-allowed"
-                  : "border-gray-300 text-gray-600 hover:border-gray-400 hover:bg-gray-50 cursor-pointer"
-              }`}
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <path d="M15 18l-6-6 6-6" />
-              </svg>
-            </button>
-
+          {/* Step Indicator */}
+          <div className="flex justify-center mt-2 mb-3">
             <StepIndicator
               totalSteps={TUTORIAL_STEPS.length}
               currentStep={currentStep}
               onStepClick={setCurrentStep}
             />
+          </div>
+
+          {/* Navigation Buttons */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={goPrev}
+              disabled={currentStep === 0}
+              aria-label="이전 단계"
+              className={`flex-1 h-12 rounded-xl border-2 flex items-center justify-center gap-1 text-sm font-semibold transition-all ${
+                currentStep === 0
+                  ? "border-gray-200 text-gray-300 cursor-not-allowed"
+                  : "border-gray-300 text-gray-600 hover:border-gray-400 hover:bg-gray-50 cursor-pointer active:scale-[0.98]"
+              }`}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+              이전
+            </button>
 
             {isLastStep ? (
               <button
                 onClick={() => setShowQuiz(true)}
                 aria-label="퀴즈 시작"
-                className="px-4 py-2.5 bg-[#f97316] text-white rounded-full text-sm font-semibold hover:bg-[#ea580c] transition-colors flex items-center gap-1 cursor-pointer min-h-[44px]"
+                className="flex-1 h-12 bg-[#f97316] text-white rounded-xl text-sm font-semibold hover:bg-[#ea580c] transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-[0.98]"
               >
-                <span>📝</span> 퀴즈 도전!
+                📝 퀴즈 도전!
               </button>
             ) : (
               <button
                 onClick={goNext}
                 aria-label="다음 단계"
-                className="px-5 py-2.5 bg-[#f97316] text-white rounded-full text-sm font-semibold hover:bg-[#ea580c] transition-colors flex items-center gap-1 cursor-pointer min-h-[44px]"
+                className="flex-1 h-12 bg-[#f97316] text-white rounded-xl text-sm font-semibold hover:bg-[#ea580c] transition-all flex items-center justify-center gap-1 cursor-pointer active:scale-[0.98]"
               >
                 다음
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <path d="M9 18l6-6-6-6" />
                 </svg>
               </button>
